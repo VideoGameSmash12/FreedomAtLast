@@ -7,7 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.CreatureType;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -24,7 +24,7 @@ public class Command_tossmob extends TFM_Command
         {
             TFM_UserInfo playerData = TFM_UserInfo.getPlayerData(sender_p);
 
-            CreatureType creature = CreatureType.PIG;
+            EntityType creature = EntityType.PIG;
             if (args.length >= 1)
             {
                 if (TFM_Util.isStopCommand(args[0]))
@@ -34,10 +34,10 @@ public class Command_tossmob extends TFM_Command
                     return true;
                 }
                 
-                if ((creature = TFM_Util.getCreatureType(args[0])) == null)
+                if ((creature = TFM_Util.getEntityType(args[0])) == null)
                 {
                     sender.sendMessage(ChatColor.RED + args[0] + " is not a supported mob type. Using a pig instead.");
-                    creature = CreatureType.PIG;
+                    creature = EntityType.PIG;
                 }
             }
 

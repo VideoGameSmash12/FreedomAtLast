@@ -1,7 +1,6 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import me.StevenLawson.TotalFreedomMod.TFM_UserInfo;
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
@@ -26,11 +25,11 @@ public class Command_tfsmite extends TFM_Command
 
         if (senderIsConsole || TFM_Util.isUserSuperadmin(sender, plugin))
         {
-            List<Player> targets = new ArrayList<Player>();
+            List<Player> targets = new ArrayList<>();
 
             if (args[0].equalsIgnoreCase("all"))
             {
-                targets = Arrays.asList(Bukkit.getOnlinePlayers());
+                targets.addAll(Bukkit.getOnlinePlayers());
             }
             else
             {

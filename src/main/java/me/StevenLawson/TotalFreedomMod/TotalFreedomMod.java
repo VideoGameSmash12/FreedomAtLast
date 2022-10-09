@@ -180,7 +180,7 @@ public class TotalFreedomMod extends JavaPlugin
         {
             superadmins.add(user.toLowerCase().trim());
 
-            List<String> user_ips = config.getStringListFixed(user);
+            List<String> user_ips = config.getStringList(user);
             for (String ip : user_ips)
             {
                 ip = ip.toLowerCase().trim();
@@ -201,27 +201,9 @@ public class TotalFreedomMod extends JavaPlugin
     {
         PluginManager pm = this.getServer().getPluginManager();
 
-        pm.registerEvent(Event.Type.ENTITY_EXPLODE, entityListener, Event.Priority.High, this);
-        pm.registerEvent(Event.Type.ENTITY_COMBUST, entityListener, Event.Priority.High, this);
-        pm.registerEvent(Event.Type.ENTITY_DAMAGE, entityListener, Event.Priority.High, this);
-        pm.registerEvent(Event.Type.EXPLOSION_PRIME, entityListener, Event.Priority.High, this);
-        pm.registerEvent(Event.Type.CREATURE_SPAWN, entityListener, Event.Priority.Normal, this);
-
-        pm.registerEvent(Event.Type.BLOCK_IGNITE, blockListener, Event.Priority.High, this);
-        pm.registerEvent(Event.Type.BLOCK_BURN, blockListener, Event.Priority.High, this);
-        pm.registerEvent(Event.Type.BLOCK_PLACE, blockListener, Event.Priority.High, this);
-        pm.registerEvent(Event.Type.BLOCK_BREAK, blockListener, Event.Priority.Normal, this);
-
-        pm.registerEvent(Event.Type.PLAYER_COMMAND_PREPROCESS, playerListener, Event.Priority.High, this);
-        pm.registerEvent(Event.Type.PLAYER_INTERACT, playerListener, Event.Priority.High, this);
-        pm.registerEvent(Event.Type.PLAYER_MOVE, playerListener, Event.Priority.Normal, this);
-        pm.registerEvent(Event.Type.PLAYER_CHAT, playerListener, Event.Priority.Normal, this);
-        pm.registerEvent(Event.Type.PLAYER_DROP_ITEM, playerListener, Event.Priority.Normal, this);
-        pm.registerEvent(Event.Type.PLAYER_KICK, playerListener, Event.Priority.Monitor, this);
-        pm.registerEvent(Event.Type.PLAYER_QUIT, playerListener, Event.Priority.Monitor, this);
-        pm.registerEvent(Event.Type.PLAYER_JOIN, playerListener, Event.Priority.Monitor, this);
-
-        pm.registerEvent(Event.Type.WEATHER_CHANGE, weatherListener, Event.Priority.High, this);
-        pm.registerEvent(Event.Type.THUNDER_CHANGE, weatherListener, Event.Priority.High, this);
+        Bukkit.getPluginManager().registerEvents(entityListener, this);
+        Bukkit.getPluginManager().registerEvents(blockListener, this);
+        Bukkit.getPluginManager().registerEvents(playerListener, this);
+        Bukkit.getPluginManager().registerEvents(weatherListener, this);
     }
 }

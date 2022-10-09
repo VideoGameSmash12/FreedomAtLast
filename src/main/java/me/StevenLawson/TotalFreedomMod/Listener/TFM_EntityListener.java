@@ -11,10 +11,12 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Slime;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
-public class TFM_EntityListener extends EntityListener
+public class TFM_EntityListener implements Listener
 {
     private TotalFreedomMod plugin;
 
@@ -23,7 +25,7 @@ public class TFM_EntityListener extends EntityListener
         this.plugin = instance;
     }
 
-    @Override
+    @EventHandler
     public void onEntityExplode(EntityExplodeEvent event)
     {
         if (!TotalFreedomMod.allowExplosions)
@@ -35,7 +37,7 @@ public class TFM_EntityListener extends EntityListener
         event.setYield(0.0f);
     }
 
-    @Override
+    @EventHandler
     public void onExplosionPrime(ExplosionPrimeEvent event)
     {
         if (!TotalFreedomMod.allowExplosions)
@@ -47,7 +49,7 @@ public class TFM_EntityListener extends EntityListener
         event.setRadius((float) TotalFreedomMod.explosiveRadius);
     }
 
-    @Override
+    @EventHandler
     public void onEntityCombust(EntityCombustEvent event)
     {
         if (!TotalFreedomMod.allowFireSpread)
@@ -57,7 +59,7 @@ public class TFM_EntityListener extends EntityListener
         }
     }
 
-    @Override
+    @EventHandler
     public void onEntityDamage(EntityDamageEvent event)
     {
         if (event.getEntity() instanceof Player)
@@ -85,7 +87,7 @@ public class TFM_EntityListener extends EntityListener
         }
     }
 
-    @Override
+    @EventHandler
     public void onCreatureSpawn(CreatureSpawnEvent event)
     {
         if (TotalFreedomMod.mobLimiterEnabled)

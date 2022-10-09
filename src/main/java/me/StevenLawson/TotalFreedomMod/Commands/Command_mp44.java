@@ -38,7 +38,7 @@ public class Command_mp44 extends TFM_Command
                 sender.sendMessage(ChatColor.GREEN + "mp44 is ARMED! Left click with gunpowder to start firing, left click again to quit.");
                 sender.sendMessage(ChatColor.GREEN + "Type /mp44 sling to disable.  -by Madgeek1450");
                 
-                sender_p.setItemInHand(new ItemStack(Material.SULPHUR, 1));
+                sender_p.setItemInHand(new ItemStack(Material.GUNPOWDER, 1));
             }
             else
             {

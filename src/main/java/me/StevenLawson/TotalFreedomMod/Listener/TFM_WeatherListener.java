@@ -1,9 +1,11 @@
 package me.StevenLawson.TotalFreedomMod.Listener;
 
 import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.weather.*;
 
-public class TFM_WeatherListener extends WeatherListener
+public class TFM_WeatherListener implements Listener
 {
     private TotalFreedomMod plugin;
 
@@ -12,7 +14,7 @@ public class TFM_WeatherListener extends WeatherListener
         this.plugin = instance;
     }
     
-    @Override
+    @EventHandler
     public void onThunderChange(ThunderChangeEvent event)
     {
         if (event.toThunderState() && TotalFreedomMod.disableWeather)
@@ -22,7 +24,7 @@ public class TFM_WeatherListener extends WeatherListener
         }
     }
 
-    @Override
+    @EventHandler
     public void onWeatherChange(WeatherChangeEvent event)
     {
         if (event.toWeatherState() && TotalFreedomMod.disableWeather)

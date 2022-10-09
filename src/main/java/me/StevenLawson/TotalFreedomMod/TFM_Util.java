@@ -22,12 +22,8 @@ import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -38,20 +34,20 @@ public class TFM_Util
 {
     private static final Logger log = Logger.getLogger("Minecraft");
     private static Map<String, Integer> eject_tracker = new HashMap<String, Integer>();
-    private static final Map<String, CreatureType> mobtypes = new HashMap<String, CreatureType>();
+    private static final Map<String, EntityType> mobtypes = new HashMap<String, EntityType>();
     private static final List<String> stop_commands = new ArrayList<String>();
 
     static
     {
-        mobtypes.put("chicken", CreatureType.CHICKEN);
-        mobtypes.put("cow", CreatureType.COW);
-        mobtypes.put("creeper", CreatureType.CREEPER);
-        mobtypes.put("pig", CreatureType.PIG);
-        mobtypes.put("sheep", CreatureType.SHEEP);
-        mobtypes.put("skeleton", CreatureType.SKELETON);
-        mobtypes.put("spider", CreatureType.SPIDER);
-        mobtypes.put("zombie", CreatureType.ZOMBIE);
-        mobtypes.put("wolf", CreatureType.WOLF);
+        mobtypes.put("chicken", EntityType.CHICKEN);
+        mobtypes.put("cow", EntityType.COW);
+        mobtypes.put("creeper", EntityType.CREEPER);
+        mobtypes.put("pig", EntityType.PIG);
+        mobtypes.put("sheep", EntityType.SHEEP);
+        mobtypes.put("skeleton", EntityType.SKELETON);
+        mobtypes.put("spider", EntityType.SPIDER);
+        mobtypes.put("zombie", EntityType.ZOMBIE);
+        mobtypes.put("wolf", EntityType.WOLF);
 
         stop_commands.add("stop");
         stop_commands.add("off");
@@ -327,7 +323,7 @@ public class TFM_Util
                 fileloop:
                 for (String user : config.getKeys(false))
                 {
-                    List<String> user_ips = config.getStringListFixed(user);
+                    List<String> user_ips = config.getStringList(user);
                     for (String ip : user_ips)
                     {
                         ip = ip.toLowerCase().trim();
@@ -395,7 +391,7 @@ public class TFM_Util
         }
     }
 
-    public static CreatureType getCreatureType(String mobname)
+    public static EntityType getEntityType(String mobname)
     {
         return TFM_Util.mobtypes.get(mobname.toLowerCase().trim());
     }
@@ -533,10 +529,10 @@ public class TFM_Util
             Integer num_kicks = eject_tracker.get(player_ip);
             if (num_kicks == null)
             {
-                num_kicks = new Integer(0);
+                num_kicks = 0;
             }
 
-            num_kicks = new Integer(num_kicks.intValue() + 1);
+            num_kicks = num_kicks.intValue() + 1;
 
             if (num_kicks <= 1)
             {
@@ -575,7 +571,7 @@ public class TFM_Util
             case STRIKE_THREE:
             {
                 Bukkit.banIP(player_ip);
-                Bukkit.getOfflinePlayer(p.getName()).setBanned(true);
+                Bukkit.getOfflinePlayer(p.getName()).banPlayer("lol");
                 break;
             }
         }

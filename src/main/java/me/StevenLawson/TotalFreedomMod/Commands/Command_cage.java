@@ -62,11 +62,11 @@ public class Command_cage extends TFM_Command
             {
                 if (args[2].equalsIgnoreCase("water"))
                 {
-                    cage_material_inner = Material.STATIONARY_WATER;
+                    cage_material_inner = Material.WATER;
                 }
                 else if (args[2].equalsIgnoreCase("lava"))
                 {
-                    cage_material_inner = Material.STATIONARY_LAVA;
+                    cage_material_inner = Material.LAVA;
                 }
             }
 

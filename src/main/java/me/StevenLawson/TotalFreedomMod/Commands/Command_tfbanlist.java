@@ -1,6 +1,7 @@
 package me.StevenLawson.TotalFreedomMod.Commands;
 
 import me.StevenLawson.TotalFreedomMod.TFM_Util;
+import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -21,7 +22,7 @@ public class Command_tfbanlist extends TFM_Command
                 {
                     for (OfflinePlayer p : Bukkit.getBannedPlayers())
                     {
-                        p.setBanned(false);
+                        Bukkit.getBanList(BanList.Type.NAME).pardon(p.getName());
                     }
 
                     sender.sendMessage(ChatColor.GRAY + "Ban list has been purged.");

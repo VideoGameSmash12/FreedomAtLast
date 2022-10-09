@@ -15,12 +15,14 @@ import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
-public class TFM_PlayerListener extends PlayerListener
+public class TFM_PlayerListener implements Listener
 {
     private TotalFreedomMod plugin;
     private static final Logger log = Logger.getLogger("Minecraft");
@@ -30,7 +32,7 @@ public class TFM_PlayerListener extends PlayerListener
         this.plugin = instance;
     }
 
-    @Override
+    @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event)
     {
         Player player = event.getPlayer();
@@ -64,14 +66,19 @@ public class TFM_PlayerListener extends PlayerListener
                     Location player_pos = player.getLocation();
                     Vector direction = player_pos.getDirection().normalize();
 
-                    LivingEntity rezzed_mob = player.getWorld().spawnCreature(player_pos.add(direction.multiply(2.0)), playerdata.mobThrowerCreature());
+                    if (!LivingEntity.class.isAssignableFrom(playerdata.mobThrowerCreature().getEntityClass()))
+                    {
+                        return;
+                    }
+
+                    LivingEntity rezzed_mob = (LivingEntity) player.getWorld().spawn(player_pos.add(direction.multiply(2.0)), playerdata.mobThrowerCreature().getEntityClass());
                     rezzed_mob.setVelocity(direction.multiply(playerdata.mobThrowerSpeed()));
                     playerdata.enqueueMob(rezzed_mob);
 
                     event.setCancelled(true);
                 }
             }
-            else if (material == Material.SULPHUR)
+            else if (material == Material.GUNPOWDER)
             {
                 TFM_UserInfo playerdata = TFM_UserInfo.getPlayerData(player);
 
@@ -92,7 +99,7 @@ public class TFM_PlayerListener extends PlayerListener
         }
     }
 
-    @Override
+    @EventHandler
     public void onPlayerMove(PlayerMoveEvent event)
     {
         Player p = event.getPlayer();
@@ -198,7 +205,7 @@ public class TFM_PlayerListener extends PlayerListener
         }
     }
 
-    @Override
+    @EventHandler
     public void onPlayerChat(PlayerChatEvent event)
     {
         Player p = event.getPlayer();
@@ -217,7 +224,7 @@ public class TFM_PlayerListener extends PlayerListener
         }
     }
 
-    @Override
+    @EventHandler
     public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event)
     {
         String command = event.getMessage();
@@ -291,7 +298,7 @@ public class TFM_PlayerListener extends PlayerListener
         }
     }
 
-    @Override
+    @EventHandler
     public void onPlayerDropItem(PlayerDropItemEvent event)
     {
         if (TotalFreedomMod.autoEntityWipe)
@@ -307,7 +314,7 @@ public class TFM_PlayerListener extends PlayerListener
         }
     }
 
-    @Override
+    @EventHandler
     public void onPlayerKick(PlayerKickEvent event)
     {
         TFM_UserInfo playerdata = TFM_UserInfo.getPlayerData(event.getPlayer());
@@ -319,7 +326,7 @@ public class TFM_PlayerListener extends PlayerListener
         }
     }
 
-    @Override
+    @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event)
     {
         TFM_UserInfo playerdata = TFM_UserInfo.getPlayerData(event.getPlayer());
@@ -331,7 +338,7 @@ public class TFM_PlayerListener extends PlayerListener
         }
     }
 
-    @Override
+    @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event)
     {
         try

@@ -46,7 +46,7 @@ public class Command_gadmin extends TFM_Command
                     }
                     else if (mode.equals("nameban"))
                     {
-                        Bukkit.getOfflinePlayer(p.getName()).setBanned(true);
+                        Bukkit.getOfflinePlayer(p.getName()).banPlayer("Banned by an operator");
                         TFM_Util.bcastMsg(String.format("Banning Name: %s.", p.getName()), ChatColor.RED);
                         p.kickPlayer("Username banned by Administrator.");
                     }
@@ -72,7 +72,7 @@ public class Command_gadmin extends TFM_Command
                         }
                         TFM_Util.bcastMsg(String.format("Banning Name: %s, IP: %s.", p.getName(), user_ip), ChatColor.RED);
                         Bukkit.banIP(user_ip);
-                        Bukkit.getOfflinePlayer(p.getName()).setBanned(true);
+                        Bukkit.getOfflinePlayer(p.getName()).banPlayer("Banned by an operator");
                         p.kickPlayer("IP and username banned by Administrator.");
                     }
                     else if (mode.equals("op"))

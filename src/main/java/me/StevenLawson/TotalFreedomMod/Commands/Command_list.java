@@ -16,7 +16,7 @@ public class Command_list extends TFM_Command
 
         if (senderIsConsole)
         {
-            onlineStats.append(String.format("There are %d out of a maximum %d players online.", Bukkit.getOnlinePlayers().length, Bukkit.getMaxPlayers()));
+            onlineStats.append(String.format("There are %d out of a maximum %d players online.", Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers()));
 
             onlineUsers.append("Connected players: ");
             boolean first = true;
@@ -50,7 +50,7 @@ public class Command_list extends TFM_Command
         }
         else
         {
-            onlineStats.append(ChatColor.BLUE).append("There are ").append(ChatColor.RED).append(Bukkit.getOnlinePlayers().length);
+            onlineStats.append(ChatColor.BLUE).append("There are ").append(ChatColor.RED).append(Bukkit.getOnlinePlayers().size());
             onlineStats.append(ChatColor.BLUE).append(" out of a maximum ").append(ChatColor.RED).append(Bukkit.getMaxPlayers());
             onlineStats.append(ChatColor.BLUE).append(" players online.");
 

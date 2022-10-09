@@ -8,10 +8,12 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
 import org.bukkit.inventory.ItemStack;
 
-public class TFM_BlockListener extends BlockListener
+public class TFM_BlockListener implements Listener
 {
     private TotalFreedomMod plugin;
     private static final Logger log = Logger.getLogger("Minecraft");
@@ -21,7 +23,7 @@ public class TFM_BlockListener extends BlockListener
         this.plugin = instance;
     }
 
-    @Override
+    @EventHandler
     public void onBlockBurn(BlockBurnEvent event)
     {
         if (!TotalFreedomMod.allowFireSpread)
@@ -31,7 +33,7 @@ public class TFM_BlockListener extends BlockListener
         }
     }
 
-    @Override
+    @EventHandler
     public void onBlockIgnite(BlockIgniteEvent event)
     {
         if (!TotalFreedomMod.allowFirePlace)
@@ -41,7 +43,7 @@ public class TFM_BlockListener extends BlockListener
         }
     }
 
-    @Override
+    @EventHandler
     public void onBlockBreak(BlockBreakEvent event)
     {
         if (TotalFreedomMod.nukeMonitor)
@@ -89,7 +91,7 @@ public class TFM_BlockListener extends BlockListener
         }
     }
 
-    @Override
+    @EventHandler
     public void onBlockPlace(BlockPlaceEvent event)
     {
         Player p = event.getPlayer();
@@ -137,8 +139,8 @@ public class TFM_BlockListener extends BlockListener
             }
         }
 
-        ItemStack is = new ItemStack(event.getBlockPlaced().getType(), 1, (short) 0, event.getBlockPlaced().getData());
-        if (is.getType() == Material.LAVA || is.getType() == Material.STATIONARY_LAVA)
+        ItemStack is = new ItemStack(event.getBlockPlaced().getType(), 1);
+        if (is.getType() == Material.LAVA || is.getType() == Material.LAVA)
         {
             if (TotalFreedomMod.allowLavaPlace)
             {
@@ -160,7 +162,7 @@ public class TFM_BlockListener extends BlockListener
                 return;
             }
         }
-        else if (is.getType() == Material.WATER || is.getType() == Material.STATIONARY_WATER)
+        else if (is.getType() == Material.WATER || is.getType() == Material.WATER)
         {
             if (TotalFreedomMod.allowWaterPlace)
             {

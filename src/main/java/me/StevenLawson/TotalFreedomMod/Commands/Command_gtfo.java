@@ -69,7 +69,7 @@ public class Command_gtfo extends TFM_Command
             Bukkit.banIP(user_ip);
 
             //Ban Username:
-            Bukkit.getOfflinePlayer(p.getName()).setBanned(true);
+            Bukkit.getOfflinePlayer(p.getName()).banPlayer("GTFO");
 
             //Kick Player:
             p.kickPlayer("GTFO");
